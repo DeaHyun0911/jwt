@@ -1,4 +1,4 @@
-package com.jwt.dto.response;
+package com.jwt.dto.response.user;
 
 import com.jwt.domain.UserRole;
 
