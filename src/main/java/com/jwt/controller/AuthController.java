@@ -36,7 +36,9 @@ public class AuthController {
 	@Operation(description = "로그인")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
-		return ResponseEntity.status(OK).body(authService.login(loginRequest));
+		return ResponseEntity.status(OK)
+			.header("Authorization", "Bearer " + authService.login(loginRequest).getToken())
+			.body(authService.login(loginRequest));
 	}
 
 }

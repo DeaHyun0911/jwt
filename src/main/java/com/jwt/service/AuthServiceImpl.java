@@ -40,7 +40,8 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public LoginResponse login(LoginRequest loginRequest) {
-		User user = authRepository.findByUsername(loginRequest.getUsername()).get();
+		User user = authRepository.findByUsername(loginRequest.getUsername())
+			.orElseThrow(() -> new CommonException(NOT_FOUND_USER));
 
 		if(!user.getPassword().equals(loginRequest.getPassword())) {
 			throw new CommonException(PASSWORD_MISMATCH);
