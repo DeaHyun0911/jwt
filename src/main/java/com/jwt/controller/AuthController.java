@@ -12,6 +12,7 @@ import com.jwt.dto.request.SignupRequest;
 import com.jwt.dto.response.user.SignupResponse;
 import com.jwt.service.AuthService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,7 +23,7 @@ public class AuthController {
 	private final AuthService authService;
 
 	@PostMapping("/signup")
-	public ResponseEntity<SignupResponse> signUp(@RequestBody SignupRequest signupRequest) {
+	public ResponseEntity<SignupResponse> signUp(@RequestBody @Valid SignupRequest signupRequest) {
 		return ResponseEntity.status(CREATED).body(authService.signup(signupRequest));
 	}
 
