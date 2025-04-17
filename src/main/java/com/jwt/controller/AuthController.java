@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jwt.dto.request.SignupRequest;
-import com.jwt.dto.response.SignupResponse;
+import com.jwt.dto.response.user.SignupResponse;
 import com.jwt.service.AuthService;
 
 import lombok.RequiredArgsConstructor;

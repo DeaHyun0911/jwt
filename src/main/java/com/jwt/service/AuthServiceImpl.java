@@ -1,12 +1,15 @@
 package com.jwt.service;
 
+import static com.jwt.exception.ErrorCode.*;
+
 import org.springframework.stereotype.Service;
 
 import com.jwt.domain.User;
 import com.jwt.dto.request.LoginRequest;
 import com.jwt.dto.request.SignupRequest;
-import com.jwt.dto.response.LoginResponse;
-import com.jwt.dto.response.SignupResponse;
+import com.jwt.dto.response.user.LoginResponse;
+import com.jwt.dto.response.user.SignupResponse;
+import com.jwt.exception.CommonException;
 import com.jwt.repository.AuthRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,10 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public SignupResponse signup(SignupRequest signupRequest) {
+		if(authRepository.existsByUsername(signupRequest.getUsername())) {
+			throw new CommonException(USER_ALREADY_EXISTS);
+		}
+
 		User user = User.builder()
 			.username(signupRequest.getUsername())
 			.password(signupRequest.getPassword())
