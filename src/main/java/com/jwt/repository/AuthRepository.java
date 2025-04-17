@@ -7,4 +7,5 @@ import com.jwt.domain.User;
 public interface AuthRepository {
 	User save(User user);
 	Optional<User> findByUsername(String username);
+	Boolean existsByUsername(String username);
 }

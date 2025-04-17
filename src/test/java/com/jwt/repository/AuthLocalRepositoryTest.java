@@ -44,4 +44,30 @@ class AuthLocalRepositoryTest {
 		assertThat(user).isEqualTo(result);
 	}
 
+	@Test
+	public void existsByUsername() {
+		//given
+		User user = User.builder()
+			.username("test2")
+			.password("1234")
+			.nickname("nickname")
+			.build();
+		authLocalRepository.save(user);
+
+		//when
+		boolean result = authLocalRepository.existsByUsername(user.getUsername());
+
+		//then
+		assertThat(result).isTrue();
+	}
+
+	@Test
+	public void notExistsByUsername() {
+		//when
+		boolean result = authLocalRepository.existsByUsername("test3");
+
+		//then
+		assertThat(result).isFalse();
+	}
+
 }

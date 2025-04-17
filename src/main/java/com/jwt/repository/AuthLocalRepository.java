@@ -23,4 +23,9 @@ public class AuthLocalRepository implements AuthRepository {
 	public Optional<User> findByUsername(String username) {
 		return Optional.ofNullable(users.get(username));
 	}
+
+	@Override
+	public Boolean existsByUsername(String username) {
+		return users.containsKey(username);
+	}
 }
