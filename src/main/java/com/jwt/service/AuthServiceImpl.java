@@ -2,6 +2,7 @@ package com.jwt.service;
 
 import static com.jwt.exception.ErrorCode.*;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jwt.domain.User;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthServiceImpl implements AuthService {
 
 	private final AuthRepository authRepository;
+	private final BCryptPasswordEncoder PasswordEncoder;
 
 	@Override
 	public SignupResponse signup(SignupRequest signupRequest) {
@@ -29,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
 
 		User user = User.builder()
 			.username(signupRequest.getUsername())
-			.password(signupRequest.getPassword())
+			.password(PasswordEncoder.encode(signupRequest.getPassword()))
 			.nickname(signupRequest.getNickname())
 			.build();
 
@@ -43,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
 		User user = authRepository.findByUsername(loginRequest.getUsername())
 			.orElseThrow(() -> new CommonException(NOT_FOUND_USER));
 
-		if(!user.getPassword().equals(loginRequest.getPassword())) {
+		if(!PasswordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
 			throw new CommonException(PASSWORD_MISMATCH);
 		}
 
