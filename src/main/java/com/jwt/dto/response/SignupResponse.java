@@ -12,7 +12,7 @@ import lombok.Getter;
 public class SignupResponse {
 	private final String username;
 	private final String nickname;
-	private final List<RoleResponse> userRole;
+	private final List<RoleResponse> roles;
 
 	public static SignupResponse from(User user) {
 		return new SignupResponse(user.getUsername(), user.getNickname(), List.of(RoleResponse.from(user.getRole())));
