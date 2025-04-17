@@ -11,6 +11,7 @@ import com.jwt.dto.response.user.LoginResponse;
 import com.jwt.dto.response.user.SignupResponse;
 import com.jwt.exception.CommonException;
 import com.jwt.repository.AuthRepository;
+import com.jwt.util.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,7 +39,15 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public LoginResponse Login(LoginRequest loginRequest) {
-		return null;
+	public LoginResponse login(LoginRequest loginRequest) {
+		User user = authRepository.findByUsername(loginRequest.getUsername()).get();
+
+		if(!user.getPassword().equals(loginRequest.getPassword())) {
+			throw new CommonException(PASSWORD_MISMATCH);
+		}
+
+		String token = JwtUtil.createToken(user);
+
+		return new LoginResponse(token);
 	}
 }

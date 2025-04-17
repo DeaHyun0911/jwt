@@ -8,23 +8,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jwt.dto.request.LoginRequest;
 import com.jwt.dto.request.SignupRequest;
+import com.jwt.dto.response.user.LoginResponse;
 import com.jwt.dto.response.user.SignupResponse;
 import com.jwt.service.AuthService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Tag(name="auth", description = "회원관리 API")
 public class AuthController {
 
 	private final AuthService authService;
 
+	@Operation(description = "회원가입")
 	@PostMapping("/signup")
 	public ResponseEntity<SignupResponse> signUp(@RequestBody @Valid SignupRequest signupRequest) {
 		return ResponseEntity.status(CREATED).body(authService.signup(signupRequest));
+	}
+
+	@Operation(description = "로그인")
+	@PostMapping("/login")
+	public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
+		return ResponseEntity.status(OK).body(authService.login(loginRequest));
 	}
 
 }

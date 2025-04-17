@@ -9,5 +9,5 @@ public interface AuthService {
 
 	SignupResponse signup(SignupRequest signupRequest);
 
-	LoginResponse Login(LoginRequest loginRequest);
+	LoginResponse login(LoginRequest loginRequest);
 }
