@@ -20,7 +20,7 @@ public class AuthLocalRepository implements AuthRepository {
 	}
 
 	@Override
-	public Optional<User> findById(Long id) {
+	public Optional<User> findByUsername(String username) {
 		return Optional.empty();
 	}
 }
