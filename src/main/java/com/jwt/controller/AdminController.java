@@ -17,14 +17,14 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor
-@Tag(name = "admin", description = "관리자 전용 API")
+@Tag(name = "관리자 전용 API")
 public class AdminController {
 
 	private final AdminService adminService;
 
 	@Operation(description = "관리자 권한 부여")
-	@PatchMapping("/users/{username}/roles")
-	public ResponseEntity<UserResponse> grantAdminRole(@PathVariable String username) {
-		return ResponseEntity.status(HttpStatus.OK).body(adminService.grantAdminRole(username));
+	@PatchMapping("/users/{userId}/roles")
+	public ResponseEntity<UserResponse> grantAdminRole(@PathVariable Long userId) {
+		return ResponseEntity.status(HttpStatus.OK).body(adminService.grantAdminRole(userId));
 	}
 }

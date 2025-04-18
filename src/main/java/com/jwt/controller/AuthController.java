@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-@Tag(name="auth", description = "회원관리 API")
+@Tag(name="회원전용 API")
 public class AuthController {
 
 	private final AuthService authService;
