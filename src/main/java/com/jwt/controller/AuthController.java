@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jwt.dto.request.LoginRequest;
 import com.jwt.dto.request.SignupRequest;
 import com.jwt.dto.response.user.LoginResponse;
-import com.jwt.dto.response.user.SignupResponse;
+import com.jwt.dto.response.user.UserResponse;
 import com.jwt.service.AuthService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,16 +29,18 @@ public class AuthController {
 
 	@Operation(description = "회원가입")
 	@PostMapping("/signup")
-	public ResponseEntity<SignupResponse> signUp(@RequestBody @Valid SignupRequest signupRequest) {
+	public ResponseEntity<UserResponse> signUp(@RequestBody @Valid SignupRequest signupRequest) {
 		return ResponseEntity.status(CREATED).body(authService.signup(signupRequest));
 	}
 
 	@Operation(description = "로그인")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
+		LoginResponse response = authService.login(loginRequest);
+
 		return ResponseEntity.status(OK)
-			.header("Authorization", "Bearer " + authService.login(loginRequest).getToken())
-			.body(authService.login(loginRequest));
+			.header("Authorization", "Bearer " + response.getToken())
+			.body(response);
 	}
 
 }
