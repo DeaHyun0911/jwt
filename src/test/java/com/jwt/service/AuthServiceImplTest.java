@@ -6,7 +6,6 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,9 +16,8 @@ import com.jwt.domain.User;
 import com.jwt.domain.UserRole;
 import com.jwt.dto.request.SignupRequest;
 import com.jwt.dto.response.user.RoleResponse;
-import com.jwt.dto.response.user.SignupResponse;
+import com.jwt.dto.response.user.UserResponse;
 import com.jwt.exception.CommonException;
-import com.jwt.exception.ErrorCode;
 import com.jwt.repository.AuthRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -43,10 +41,10 @@ class AuthServiceImplTest {
 			.build();
 
 		//when
-		SignupResponse actualResult = authService.signup(signupRequest);
+		UserResponse actualResult = authService.signup(signupRequest);
 
 		//then
-		SignupResponse expectedResult = new SignupResponse("test", "nickname", List.of(RoleResponse.from(UserRole.USER)));
+		UserResponse expectedResult = new UserResponse("test", "nickname", List.of(RoleResponse.from(UserRole.USER)));
 		assertThat(actualResult)
 			.usingRecursiveComparison()
 			.isEqualTo(expectedResult);

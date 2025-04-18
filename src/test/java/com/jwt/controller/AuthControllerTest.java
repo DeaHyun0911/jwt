@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jwt.domain.UserRole;
 import com.jwt.dto.request.SignupRequest;
 import com.jwt.dto.response.user.RoleResponse;
-import com.jwt.dto.response.user.SignupResponse;
+import com.jwt.dto.response.user.UserResponse;
 import com.jwt.service.AuthServiceImpl;
 
 @WebMvcTest(AuthController.class)
@@ -39,7 +39,7 @@ class AuthControllerTest {
 	void signup_success() throws Exception {
 		//given
 		SignupRequest request = new SignupRequest("test1", "1234", "nickname1");
-		SignupResponse response = new SignupResponse("test1", "nickname1", List.of(RoleResponse.from(UserRole.USER)));
+		UserResponse response = new UserResponse("test1", "nickname1", List.of(RoleResponse.from(UserRole.USER)));
 		when(authService.signup(any(SignupRequest.class))).thenReturn(response);
 
 		//when
@@ -52,7 +52,7 @@ class AuthControllerTest {
 			.getResponse()
 			.getContentAsString();
 
-		SignupResponse actualResult = this.mapper.readValue(content, SignupResponse.class);
+		UserResponse actualResult = this.mapper.readValue(content, UserResponse.class);
 
 		//then
 		assertThat(actualResult)
