@@ -19,11 +19,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+	private final CumtomAuthenticationEntryPoint authenticationEntryPoint;
+
 	public static final String[] AUTH_ALLOWLIST = {
 		"/auth/signup",
 		"/auth/login",
+		"/create-admin",
 		"/swagger-ui/**",
-		"/v3/api-docs"
+		"/v3/api-docs",
+		"/v3/**"
 	};
 
 	@Bean
@@ -41,7 +45,10 @@ public class SecurityConfig {
 			.addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeHttpRequests(auth -> auth
 				.requestMatchers(AUTH_ALLOWLIST).permitAll()
+				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated());
+
+		http.exceptionHandling((handling) -> handling.authenticationEntryPoint(authenticationEntryPoint));
 
 		return http.build();
 
