@@ -1,6 +1,5 @@
 package com.jwt.util;
 
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +23,7 @@ public class JwtUtil {
 		Date expiration = new Date(now.getTime() + EXPIRATION_TIME);
 
 		Map<String, Object> claims = new HashMap<>();
+		claims.put("id", user.getId());
 		claims.put("nickname", user.getNickname());
 		claims.put("roles", user.getRole());
 

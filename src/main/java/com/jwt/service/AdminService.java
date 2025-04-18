@@ -6,7 +6,7 @@ import com.jwt.dto.response.user.UserResponse;
 import jakarta.validation.Valid;
 
 public interface AdminService {
-	UserResponse grantAdminRole(String username);
+	UserResponse grantAdminRole(Long userId);
 
 	UserResponse create(@Valid SignupRequest signupRequest);
 }

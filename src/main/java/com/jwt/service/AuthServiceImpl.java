@@ -35,9 +35,9 @@ public class AuthServiceImpl implements AuthService {
 			.nickname(signupRequest.getNickname())
 			.build();
 
-		authRepository.save(user);
+		User savedUser = authRepository.save(user);
 
-		return UserResponse.from(user);
+		return UserResponse.from(savedUser);
 	}
 
 	@Override

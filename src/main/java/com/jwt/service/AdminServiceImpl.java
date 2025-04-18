@@ -22,11 +22,11 @@ public class AdminServiceImpl implements AdminService {
 	private final BCryptPasswordEncoder PasswordEncoder;
 
 	@Override
-	public UserResponse grantAdminRole(String username) {
-		User user = authRepository.findByUsername(username).orElseThrow(() -> new CommonException(NOT_FOUND_USER));
+	public UserResponse grantAdminRole(Long userId) {
+		User user = authRepository.findById(userId).orElseThrow(() -> new CommonException(NOT_FOUND_USER));
 
 		user.updateRole(UserRole.ADMIN);
-		User savedUser = authRepository.save(user);
+		User savedUser = authRepository.update(user);
 
 		return UserResponse.from(savedUser);
 	}
@@ -44,8 +44,8 @@ public class AdminServiceImpl implements AdminService {
 			.role(UserRole.ADMIN)
 			.build();
 
-		authRepository.save(user);
+		User savedUser = authRepository.save(user);
 
-		return UserResponse.from(user);
+		return UserResponse.from(savedUser);
 	}
 }

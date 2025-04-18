@@ -57,13 +57,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 			String userName = claims.getSubject();
 			String role = claims.get("roles", String.class);
 
-			System.out.println("role = " + role);
-
 			List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_" + role));
-			System.out.println("✅ 권한 확인: " + authorities);
+			System.out.println("권한 확인: " + authorities);
 
-			Authentication authentication = new TestingAuthenticationToken(userName, null, authorities);
-			return authentication;
+			return new TestingAuthenticationToken(userName, null, authorities);
 
 		} catch (ExpiredJwtException e) {
 			throw new CommonException(EXPIRED_TOKEN);
