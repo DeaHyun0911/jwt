@@ -3,11 +3,12 @@ package com.jwt.service;
 import com.jwt.dto.request.LoginRequest;
 import com.jwt.dto.request.SignupRequest;
 import com.jwt.dto.response.user.LoginResponse;
-import com.jwt.dto.response.user.SignupResponse;
+import com.jwt.dto.response.user.UserResponse;
 
 public interface AuthService {
 
-	SignupResponse signup(SignupRequest signupRequest);
+	UserResponse signup(SignupRequest signupRequest);
 
 	LoginResponse login(LoginRequest loginRequest);
+
 }

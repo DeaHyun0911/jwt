@@ -9,12 +9,12 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SignupResponse {
+public class UserResponse {
 	private final String username;
 	private final String nickname;
 	private final List<RoleResponse> roles;
 
-	public static SignupResponse from(User user) {
-		return new SignupResponse(user.getUsername(), user.getNickname(), List.of(RoleResponse.from(user.getRole())));
+	public static UserResponse from(User user) {
+		return new UserResponse(user.getUsername(), user.getNickname(), List.of(RoleResponse.from(user.getRole())));
 	}
 }

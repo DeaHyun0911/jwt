@@ -9,7 +9,7 @@ import com.jwt.domain.User;
 import com.jwt.dto.request.LoginRequest;
 import com.jwt.dto.request.SignupRequest;
 import com.jwt.dto.response.user.LoginResponse;
-import com.jwt.dto.response.user.SignupResponse;
+import com.jwt.dto.response.user.UserResponse;
 import com.jwt.exception.CommonException;
 import com.jwt.repository.AuthRepository;
 import com.jwt.util.JwtUtil;
@@ -24,7 +24,7 @@ public class AuthServiceImpl implements AuthService {
 	private final BCryptPasswordEncoder PasswordEncoder;
 
 	@Override
-	public SignupResponse signup(SignupRequest signupRequest) {
+	public UserResponse signup(SignupRequest signupRequest) {
 		if(authRepository.existsByUsername(signupRequest.getUsername())) {
 			throw new CommonException(USER_ALREADY_EXISTS);
 		}
@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
 
 		authRepository.save(user);
 
-		return SignupResponse.from(user);
+		return UserResponse.from(user);
 	}
 
 	@Override
@@ -53,4 +53,5 @@ public class AuthServiceImpl implements AuthService {
 
 		return new LoginResponse(token);
 	}
+
 }
