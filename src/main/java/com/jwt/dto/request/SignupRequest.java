@@ -16,7 +16,6 @@ public class SignupRequest {
 
 	@Schema(example = "1234")
 	@NotBlank(message = "비밀번호를 입력해주세요.")
-	@Size(min = 4, message = "비밀번호는 4자리 이상이여야 합니다.")
 	private final String password;
 
 	@Schema(example = "최대현")

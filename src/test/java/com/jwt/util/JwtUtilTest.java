@@ -11,7 +11,7 @@ import com.jwt.domain.UserRole;
 public class JwtUtilTest {
 
 	@Test
-	public void createToken() {
+	public void 토큰생성_성공() {
 		String userName = "test";
 		String nickName = "nickname";
 

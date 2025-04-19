@@ -16,7 +16,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.jwt.config.SecurityConfig;
-import com.jwt.exception.CommonException;
+import com.jwt.exception.JwtAuthenticationException;
 import com.jwt.util.JwtUtil;
 
 import io.jsonwebtoken.Claims;
@@ -45,7 +45,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 		System.out.println("accessToken = " + accessToken);
 
 		Authentication authentication = createAuthentication(accessToken);
+		System.out.println("Authorities = " + authentication.getAuthorities());
+		System.out.println("Is Authenticated = " + authentication.isAuthenticated());
+
+
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		System.out.println("토큰 검증 완료");
 
 		filterChain.doFilter(request, response);
 	}
@@ -63,9 +68,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 			return new TestingAuthenticationToken(userName, null, authorities);
 
 		} catch (ExpiredJwtException e) {
-			throw new CommonException(EXPIRED_TOKEN);
+			throw new JwtAuthenticationException(EXPIRED_TOKEN);
 		} catch (JwtException e) {
-			throw new CommonException(INVALID_TOKEN);
+			throw new JwtAuthenticationException(INVALID_TOKEN);
 		}
 	}
 
@@ -82,7 +87,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 		if(StringUtils.isNotBlank(authorizationHeader) && authorizationHeader.startsWith("Bearer ")) {
 			return authorizationHeader.substring(7);
 		} else {
-			throw new CommonException(NOT_FOUND_TOKEN);
+			throw new JwtAuthenticationException(NOT_FOUND_TOKEN);
 		}
 	}
 }

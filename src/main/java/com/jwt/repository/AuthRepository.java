@@ -10,4 +10,5 @@ public interface AuthRepository {
 	Optional<User> findById(Long id);
 	Boolean existsByUsername(String username);
 	User update(User user);
+	void clear();
 }

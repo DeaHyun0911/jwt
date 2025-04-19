@@ -25,6 +25,7 @@ public class AdminController {
 	@Operation(description = "관리자 권한 부여")
 	@PatchMapping("/users/{userId}/roles")
 	public ResponseEntity<UserResponse> grantAdminRole(@PathVariable Long userId) {
+		System.out.println("userId = " + userId);
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.grantAdminRole(userId));
 	}
 }

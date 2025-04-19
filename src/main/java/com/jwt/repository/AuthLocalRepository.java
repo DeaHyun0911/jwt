@@ -48,4 +48,10 @@ public class AuthLocalRepository implements AuthRepository {
 		users.put(user.getId(), user);
 		return user;
 	}
+
+	@Override
+	public void clear() {
+		users.clear();
+		sequence = 1L;
+	}
 }

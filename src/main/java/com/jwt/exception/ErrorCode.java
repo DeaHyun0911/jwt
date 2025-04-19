@@ -9,6 +9,8 @@ public enum ErrorCode {
 
 	// COMMON
 	NOT_VALIDATION("NOT_VALIDATION", "형식이 올바르지 않습니다."),
+	UNAUTHORIZED("UNAUTHORIZED", "로그인이 필요합니다."),
+	FORBIDDEN("FORBIDDEN", "접근권한이 없습니다."),
 
 	// USER
 	USER_ALREADY_EXISTS("USER_ALREADY_EXISTS","이미 가입된 사용자입니다"),
@@ -16,7 +18,6 @@ public enum ErrorCode {
 	NOT_FOUND_USER("NOT_FOUND_USER", "회원정보를 찾을 수 없습니다."),
 
 	// ADMIN
-	UNAUTHORIZED("UNAUTHORIZED", "접근권한이 없습니다."),
 	ACCESS_DENIED("ACCESS_DENIED", "관리자 권한이 필요한 요청입니다. 접근 권한이 없습니다"),
 
 	// TOKEN
