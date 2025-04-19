@@ -11,6 +11,7 @@ import com.jwt.dto.request.SignupRequest;
 import com.jwt.dto.response.user.LoginResponse;
 import com.jwt.dto.response.user.UserResponse;
 import com.jwt.exception.CommonException;
+import com.jwt.exception.NotFoundException;
 import com.jwt.repository.AuthRepository;
 import com.jwt.util.JwtUtil;
 
@@ -43,7 +44,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public LoginResponse login(LoginRequest loginRequest) {
 		User user = authRepository.findByUsername(loginRequest.getUsername())
-			.orElseThrow(() -> new CommonException(NOT_FOUND_USER));
+			.orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
 		if(!PasswordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
 			throw new CommonException(PASSWORD_MISMATCH);

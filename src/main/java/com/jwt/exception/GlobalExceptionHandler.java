@@ -17,6 +17,11 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(BAD_REQUEST).body(ErrorResponse.from(e.getErrorCode()));
 	}
 
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<ErrorResponse> handleNotFound(NotFoundException e) {
+		return ResponseEntity.status(NOT_FOUND).body(ErrorResponse.from(e.getErrorCode()));
+	}
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
 		String message = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();

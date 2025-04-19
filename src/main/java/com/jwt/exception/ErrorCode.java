@@ -13,7 +13,7 @@ public enum ErrorCode {
 	FORBIDDEN("FORBIDDEN", "접근권한이 없습니다."),
 
 	// USER
-	USER_ALREADY_EXISTS("USER_ALREADY_EXISTS","이미 가입된 사용자입니다"),
+	USER_ALREADY_EXISTS("USER_ALREADY_EXISTS","이미 가입된 사용자입니다."),
 	PASSWORD_MISMATCH("PASSWORD_MISMATCH", "비밀번호가 일치하지 않습니다."),
 	NOT_FOUND_USER("NOT_FOUND_USER", "회원정보를 찾을 수 없습니다."),
 
@@ -23,7 +23,7 @@ public enum ErrorCode {
 	// TOKEN
 	NOT_FOUND_TOKEN("NOT_FOUND_TOKEN", "토큰을 찾을 수 없습니다."),
 	EXPIRED_TOKEN("EXPIRED_TOKEN", "만료된 토큰입니다."),
-	INVALID_TOKEN("INVALID_TOKEN", "유효하지 않은 토큰입니다");
+	INVALID_TOKEN("INVALID_TOKEN", "유효하지 않은 토큰입니다.");
 
 
 
